@@ -1,0 +1,1 @@
+# Kope-_Wernik_Bak_Glodek
