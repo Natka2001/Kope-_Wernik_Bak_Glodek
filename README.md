@@ -1,1 +1,7 @@
-# Kope-_Wernik_Bak_Glodek
+# Rezerwacja sal w budynkach
+
+#skład grupy:
+Faustyna Bąk
+Natalia Głodek
+Dawid Kopeć
+Ewelina Wernik
