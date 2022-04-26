@@ -2,9 +2,9 @@ import java.io.Serializable;
 
 enum EnumWydzial {WZ, WIMIR, WINIP, WIP, WILiGZ, WH}
 
-public class Osoba implements Serializable {
+public abstract class Osoba implements Serializable {
 
-    //pola
+    //POLA
     private String imie;
     private String nazwisko;
     private EnumWydzial wydzial;
@@ -42,15 +42,22 @@ public class Osoba implements Serializable {
     public Osoba() {
     }
 
-
+    /**
+     * Główny kosntruktor klasy Osoba.
+     * @param imie
+     * @param nazwisko
+     * @param wydzial
+     */
     public Osoba(String imie, String nazwisko, EnumWydzial wydzial) {
         setImie(imie);
         setNazwisko(nazwisko);
         setWydzial(wydzial);
     }
 
-
-    //tostring
+    /**
+     * Zwraca sformatowany string zawierający: imie, nazwisko, wydział
+     * @return
+     */
     @Override
     public String toString() {
         return getImie() +" " + getNazwisko() +

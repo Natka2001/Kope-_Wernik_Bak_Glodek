@@ -32,7 +32,6 @@ public class OsobyWindow extends JFrame implements ActionListener {
         this.setContentPane(mainPanel);
         this.pack();
         this.setBounds(500,300,800,400);
-
         lstPracownicy.setModel(model1);
         for (Pracownik p:budynek.getListaPracownikow()) {
             model1.addElement(p);
@@ -49,16 +48,21 @@ public class OsobyWindow extends JFrame implements ActionListener {
         else if (e.getSource() == btnDodaj) {
             Pracownik p = new Pracownik();
             JFrame frame = new OsobaWindow(p);
+
             frame.setVisible(true);
             budynek.DodajOsobe(p);
             model1.clear();
-            for (Pracownik p1 : budynek.getListaPracownikow()) {
-                model1.addElement(p1);
+            for (Pracownik s1 : budynek.getListaPracownikow()) {
+                model1.addElement(s1);
             }
         }
         else if(e.getSource() == btnUsun){
             Pracownik p = lstPracownicy.getSelectedValue();
-            budynek.UsunOsobe(p);
+            try {
+                budynek.UsunOsobe(p);
+            } catch (WlasnyWyjatek wlasnyWyjatek) {
+                wlasnyWyjatek.printStackTrace();
+            }
             model1.clear();
             for (Pracownik p1 : budynek.getListaPracownikow()) {
                 model1.addElement(p1);

@@ -54,7 +54,7 @@ public class BudynekWindow extends JFrame implements ActionListener{
             Sala s = new Sala();
             JFrame frame = new SalaWindow(s);
             frame.setVisible(true);
-            budynek.DodajSale(s);
+                budynek.DodajSale(s);
             model.clear();
             for (Sala s1 : budynek.getListaSal()) {
                 model.addElement(s1);

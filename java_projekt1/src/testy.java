@@ -1,10 +1,12 @@
 import java.io.IOException;
+import java.text.ParseException;
 
 public class testy {
-    public static void main(String[] args) throws WlasnyWyjatek {
+    public static void main(String[] args) throws WlasnyWyjatek, ParseException {
 
         Pracownik p1 = new Pracownik("Natalia", "Glodek", EnumWydzial.WH, EnumTytul.magister );
         Pracownik p2 = new Pracownik("Dawid", "Kopec", EnumWydzial.WZ, EnumTytul.dogtorHabilitowany );
+        Pracownik p3 = new Pracownik("Ewelina", "Wernik", EnumWydzial.WZ, EnumTytul.dogtorHabilitowany );
 
         Student s1 = new Student("Faustyna", "Bak", EnumWydzial.WH, "123456");
         Student s2 = new Student("Ewelina", "Wernik", EnumWydzial.WIP, "123457");
@@ -27,22 +29,18 @@ public class testy {
 
         //System.out.println(b);
 
-        Rezerwacja r2 = new Rezerwacja("30.04.2022 14:00", 60, p1);
-        Rezerwacja r1 = new Rezerwacja("15.04.2022 15:00", 60, p2);
-        Rezerwacja r3 = new Rezerwacja("15.04.2022 15:00", 60, p2);
+        //System.out.println(b);
+        Rezerwacja r1 = new Rezerwacja(p1,"12.04.2022 22:00", 100);
+        Rezerwacja r2 = new Rezerwacja(p2,"15.04.2022 6:30", 60);
+        Rezerwacja r3 = new Rezerwacja(p3,"15.04.2022 23:30", 60);
+        // Rezerwacja r4 = new Rezerwacja(s1,"15.04.2022 1:30", 60);
 
+        System.out.println(r1);
 
-        sala1.dodajRezerwacje(r1);
-       sala1.dodajRezerwacje(r2);
-       try {
-           sala1.dodajRezerwacje(r3);
-       }catch(WlasnyWyjatek e){
-           System.out.println(e);
-       }
-
-        sala3.dodajRezerwacje(r3);
-       //System.out.println(sala1);
-        //System.out.println(sala3);
+        sala1.DodajRezerwacje(r1);
+        sala1.DodajRezerwacje(r2);
+        sala1.DodajRezerwacje(r3);
+        // sala1.AddBooking(r4);
 
         b.DodajOsobe(p1);
         b.DodajOsobe(p2);

@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class RezerwacjaWindow extends JFrame implements ActionListener {
 
@@ -23,7 +25,11 @@ public class RezerwacjaWindow extends JFrame implements ActionListener {
         this.pack();
         this.setBounds(500, 300, 800, 400);
 
-        if (r.getDat() == null) {
+
+        btnZatwierdz.addActionListener(this::actionPerformed);
+        btnAnuluj.addActionListener(this::actionPerformed);
+
+        if (r.getDuration()==0) {
             for (Pracownik p : budynek.getListaPracownikow()) {
                 cmbOsoba.addItem(p);
             }
@@ -31,20 +37,24 @@ public class RezerwacjaWindow extends JFrame implements ActionListener {
             for (Pracownik p : budynek.getListaPracownikow()) {
                 cmbOsoba.addItem(p);
             }
-            txtData.setText(r.getDat().toString());
+            txtData.setText(r.getDate().toString());
             txtCzas.setText(String.valueOf(r.getDuration()));
             cmbOsoba.getSelectedItem();
         }
 
-        btnZatwierdz.addActionListener(this::actionPerformed);
-        btnAnuluj.addActionListener(this::actionPerformed);
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == btnZatwierdz){
             r.setDuration(Integer.parseInt(txtCzas.getText()));
-            r.setDate(txtData.getText());
+            SimpleDateFormat form = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+            try {
+                r.setDate(form.parse(txtData.getText()));
+            } catch (ParseException parseException) {
+                parseException.printStackTrace();
+            }
             r.setP((Pracownik)cmbOsoba.getSelectedItem());
             this.dispose();
         }

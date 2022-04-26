@@ -6,7 +6,11 @@ enum EnumTypSali { wykladowa,
     labolatoryjnaChemiczna,
     labolatoryjnaFizyczna, komputerowa, cwiczeniowa }
 
-public class Sala implements Comparable<Sala>, Serializable {
+/**
+ *  Klasa zawiera podatwowe informacje o salach oraz dodaje rezerwacje
+ */
+public class Sala implements Comparable<Sala>, Serializable, IRezerwacja{
+
     //Pola
     private String numer;
     private int iloscMiejsc;
@@ -51,8 +55,15 @@ public class Sala implements Comparable<Sala>, Serializable {
 
     //konstruktory
     public Sala() {
+        this.listaRezerwacji = new ArrayList<Rezerwacja>();
     }
 
+    /**
+     * Główny konstruktor klasy Sala.
+     * @param numer
+     * @param iloscMiejsc
+     * @param typSali
+     */
     public Sala(String numer, int iloscMiejsc, EnumTypSali typSali) {
         this.numer = numer;
         this.iloscMiejsc = iloscMiejsc;
@@ -60,32 +71,56 @@ public class Sala implements Comparable<Sala>, Serializable {
         this.listaRezerwacji = new ArrayList<Rezerwacja>();
     }
 
-    public boolean SprawdzRezerwacje(Rezerwacja r){
-        boolean c = false;
-        for (Rezerwacja rez: listaRezerwacji) {
-            if (rez.getDat().equals(r.getDat())) {
-                return true;
-            } else {
-                return false;
+    /**
+     * Sprawdzenie czy istnieje już rezerwacja o takiej dacie.
+     * @param r
+     * @return
+     */
+    public boolean CheckBooking(Rezerwacja r)
+    {
+        for(var item : listaRezerwacji)
+        {
+            if (item.getDay_start().getTime() == r.getDay_start().getTime())
+            {
+                if ((r.getStart_time().getTime() >= item.getStart_time().getTime() && r.getStart_time().getTime() < item.getEnd_time().getTime()))
+                {
+                    return false;
+                }
+                else if (r.getEnd_time().getTime() > item.getStart_time().getTime() && r.getEnd_time().getTime() <= item.getEnd_time().getTime())
+                {
+                    return false;
+                }
+                else if (r.getStart_time().getTime() < item.getStart_time().getTime() && r.getEnd_time().getTime() > item.getEnd_time().getTime())
+                {
+                    return false;
+                }
             }
         }
-        return c;
+        return true;
     }
 
-    void dodajRezerwacje(Rezerwacja r) throws WlasnyWyjatek {
-        if(SprawdzRezerwacje(r)){
-            throw new WlasnyWyjatek();
-        }
-        else{
+    /**
+     * Dodanie rezerwacji, stworzenie wyjątku gdy już istnieje rezerwacja w tym czasie
+     * @param r
+     * @throws WlasnyWyjatek
+     */
+    public  void DodajRezerwacje(Rezerwacja r) throws WlasnyWyjatek {
+        if(CheckBooking(r)){
             listaRezerwacji.add(r);
         }
+        else{
+            System.out.println("Wybrana rezerwacja już istnieje");
+        }
     }
 
-    void usunRezerwacje(Rezerwacja r){
+    public void UsunRezerwacje(Rezerwacja r){
         listaRezerwacji.remove(r);
     }
 
-    //tostring
+    /**
+     * Zwraca sformatowany string zawierający: numer, ilość miejsc, typ sali.
+     * @return
+     */
     @Override
     public String toString() {
         return "sala " + getTypSali() + ", numer sali: "+ getNumer() +

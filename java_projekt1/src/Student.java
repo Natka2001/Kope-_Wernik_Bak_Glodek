@@ -1,3 +1,6 @@
+/**
+ * Klasa zawiera podstawowe informacje o studencie
+ */
 public class Student extends Osoba{
     //POLA
     private String numerIndeksu;
@@ -20,13 +23,22 @@ public class Student extends Osoba{
 
     }
 
+    /**
+     * Główny konstruktor klasy Student
+     * @param imie
+     * @param nazwisko
+     * @param wydzial
+     * @param numerIndeksu
+     */
     public Student(String imie, String nazwisko, EnumWydzial wydzial, String numerIndeksu) {
         super(imie, nazwisko, wydzial);
         setNumerIndeksu(numerIndeksu);
     }
 
-
-    //tostring
+    /**
+     * Nadpisuje metodę ToString i zwraca sformatowany string zawierający dodatkowo numer indeksu
+     * @return
+     */
     @Override
     public String toString() {
         return super.toString() + ", nr. indeksu: " + getNumerIndeksu();

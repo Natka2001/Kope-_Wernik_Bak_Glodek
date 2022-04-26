@@ -64,7 +64,6 @@ public class OsobaWindow extends JFrame implements ActionListener {
                 p.setWydzial(EnumWydzial.WILiGZ);}
             else if(cmbWydzial.getSelectedItem().toString()=="WH") {
                 p.setWydzial(EnumWydzial.WH);}
-            this.dispose();
 
             if(cmbTytul.getSelectedItem().toString()=="magister") {
                 p.setTytul(EnumTytul.magister);}
@@ -72,6 +71,7 @@ public class OsobaWindow extends JFrame implements ActionListener {
                 p.setTytul(EnumTytul.doktor);}
             else  if(cmbTytul.getSelectedItem().toString()=="dogtorHabilitowany") {
                 p.setTytul(EnumTytul.dogtorHabilitowany);}
+            this.dispose();
         }
         else if(e.getSource() == btnAnuluj){
             this.dispose();

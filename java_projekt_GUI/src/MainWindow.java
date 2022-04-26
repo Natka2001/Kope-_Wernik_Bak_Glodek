@@ -12,8 +12,6 @@ public class MainWindow extends JFrame implements ActionListener {
     private JButton btnZarezerwuj;
 
     MainWindow(){
-
-
         this.setTitle("Rezerwacja sal w budynkach");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setContentPane(mainPanel);

@@ -19,8 +19,7 @@ class BudynekkTest {
         assertEquals(b1.getWydzial(),EnumWydzial.WZ);
     }
     @Test
-    void dodawanie_dolisty()
-    {
+    void dodawanie_dolisty() throws WlasnyWyjatek {
         Sala s1 = new Sala("1",50,EnumTypSali.wykladowa);
         b1.DodajSale(s1);
         ArrayList<Sala> pom = new ArrayList<Sala>();

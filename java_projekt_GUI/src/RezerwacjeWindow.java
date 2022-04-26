@@ -3,13 +3,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.text.ParseException;
 
 public class RezerwacjeWindow extends JFrame implements ActionListener {
     private Budynek budynek = MainWindow.budynek;
     private JButton btnDodaj;
     private JButton btnZmien;
     private JButton btnUsun;
-    private JButton btnCykliczna;
     private JButton btnPowrot;
     private JPanel mainPanel;
 
@@ -46,7 +46,7 @@ public class RezerwacjeWindow extends JFrame implements ActionListener {
 
     public void odswiezenie() {
         model.clear();
-        Sala s1 = (Sala) cmbSale.getSelectedItem();
+        Sala s1 = (Sala)cmbSale.getSelectedItem();
         for (Rezerwacja r : s1.getListaRezerwacji()) {
             model.addElement(r);
         }
@@ -57,11 +57,16 @@ public class RezerwacjeWindow extends JFrame implements ActionListener {
         if (e.getSource() == btnPowrot) {
             this.dispose();
         } else if (e.getSource() == btnDodaj) {
-            Rezerwacja r = new Rezerwacja();
+            Rezerwacja r = null;
+            try {
+                r = new Rezerwacja(null, "12.01.2001",1);
+            } catch (ParseException parseException) {
+                parseException.printStackTrace();
+            }
             JFrame frame = new RezerwacjaWindow(r);
             frame.setVisible(true);
             try {
-                ((Sala)cmbSale.getSelectedItem()).dodajRezerwacje(r);
+                ((Sala)cmbSale.getSelectedItem()).DodajRezerwacje(r);
             } catch (WlasnyWyjatek wlasnyWyjatek) {
                 wlasnyWyjatek.printStackTrace();
             }
@@ -70,7 +75,7 @@ public class RezerwacjeWindow extends JFrame implements ActionListener {
         } else if (e.getSource() == btnUsun) {
             Rezerwacja r = lstRezerwacje.getSelectedValue();
             for (Sala s : budynek.getListaSal()) {
-                s.usunRezerwacje(r);
+                s.UsunRezerwacje(r);
             }
             model.clear();
             odswiezenie();

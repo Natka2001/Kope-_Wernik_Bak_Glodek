@@ -1,5 +1,9 @@
 enum EnumTytul { magister,doktor, dogtorHabilitowany}
 
+/**
+ * Klasa zawiera podstawowe dane pracownika, który może zarezerwować salę.
+ * Klasa Pracownik dziedziczy po klasie Osoba
+ */
 public class Pracownik extends Osoba
 {
     // POLA
@@ -22,11 +26,23 @@ public class Pracownik extends Osoba
     public Pracownik() {
     }
 
+    /**
+     * Główny konstruktor klasy Pracownik
+     * @param imie
+     * @param nazwisko
+     * @param wydzial
+     * @param tytul
+     */
     public Pracownik(String imie, String nazwisko, EnumWydzial wydzial, EnumTytul tytul) {
         super(imie, nazwisko, wydzial);
         setTytul(tytul);
     }
 
+    /**
+     * Nadpisuje metodę ToString i zwraca sformatowany string zawierający: tytuł, imie, nazwisko, wydział
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return getTytul() + " " + super.toString();
